@@ -1,0 +1,36 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+            set.add(num);
+        }
+
+        Integer first = null;
+        Integer second = null;
+        Integer third = null;
+
+        for (int num : set) {
+
+            if (first == null || num > first) {
+                third = second;
+                second = first;
+                first = num;
+            }
+            else if ((second == null || num > second) && num != first) {
+                third = second;
+                second = num;
+            }
+            else if ((third == null || num > third) &&
+                     num != first && num != second) {
+                third = num;
+            }
+        }
+
+        if (third == null) {
+            return first;
+        }
+
+        return third;
+    }
+}
